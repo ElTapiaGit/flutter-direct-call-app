@@ -1,96 +1,93 @@
-📞 Aplicación de Llamada Rápida (Flutter)
+# 📞 One-Tap Call (Llamada Rápida Accesible)
 
-Este es un proyecto de Flutter simple diseñado para un propósito específico: abrir y llamar inmediatamente a un número de teléfono predefinido.
+> **Accesibilidad en un solo toque**
+>
+> One-Tap Call es una aplicación móvil desarrollada con Flutter, pensada para simplificar al máximo la acción de realizar una llamada telefónica. 
+>
+> Su objetivo es ofrecer una experiencia accesible, directa y sin distracciones, ideal para personas mayores o usuarios con dificultades para usar interfaces complejas.
 
-La aplicación sirve como un "acceso directo" en el teléfono. Al hacer clic en el ícono de la app (personalizado con la foto del contacto), la aplicación se lanza, solicita permisos (si es necesario) e inicia la llamada directa sin pasos intermedios.
+---
 
-✨ Características
+## 📱 Descripción
 
-Llamada Automática: Inicia la llamada telefónica en cuanto se abre la aplicación.
+**One-Tap Call** es una aplicación desarrollada en Flutter diseñada para la **accesibilidad extrema**. Su única función es realizar una llamada telefónica directa a un número preconfigurado inmediatamente después de abrirse.
 
-Gestión de Permisos: Utiliza permission_handler para solicitar el permiso CALL_PHONE en Android.
+Funciona como un "acceso directo inteligente" que gestiona los permisos de Android y la intención de llamada de forma transparente para el usuario.
 
-Llamada Directa: Utiliza flutter_phone_direct_caller para realizar la llamada sin necesidad de abrir el marcador manual.
+## ✨ Características Principales
 
-Interfaz Simple: Muestra la foto del contacto y el estado de la llamada.
+* **⚡ Llamada Instantánea:** La llamada se inicia automáticamente al abrir la app (en el evento `initState`).
+* **👵 Diseño Senior-Friendly:** Elimina cualquier barrera de entrada; si pueden tocar un icono, pueden llamar.
+* **🔒 Gestión de Permisos:** Detecta y solicita el permiso `CALL_PHONE` automáticamente si no está concedido.
+* **🖼️ Icono Personalizado:** El icono de la app es la foto del contacto, facilitando el reconocimiento visual cognitivo.
+* **📞 Integración Nativa:** Utiliza intents nativos de Android para "saltarse" el marcador numérico y llamar directo.
 
-Icono Personalizado: Utiliza flutter_launcher_icons para establecer el icono de la app (la foto del contacto).
+---
 
-🚀 Instalación y Configuración
+## 🛠️ Stack Tecnológico
 
-Sigue estos pasos para compilar y ejecutar el proyecto localmente.
+| Tecnología | Herramienta / Librería | Propósito |
+| :--- | :--- | :--- |
+| **Framework** | ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat&logo=flutter&logoColor=white) | Desarrollo multiplataforma. |
+| **Lenguaje** | ![Dart](https://img.shields.io/badge/Dart-0175C2?style=flat&logo=dart&logoColor=white) | Lógica de la aplicación. |
+| **Plugin** | `permission_handler` | Gestión de permisos de Android en tiempo de ejecución. |
+| **Plugin** | `flutter_phone_direct_caller` | Ejecución de la llamada sin interfaz intermedia. |
+| **Herramienta** | `flutter_launcher_icons` | Generación de iconos adaptativos (Android/iOS). |
 
-1. Prerrequisitos
+---
 
-Tener el SDK de Flutter instalado.
+## 🚀 Instalación y Configuración
 
-Un dispositivo físico Android (los simuladores no pueden realizar llamadas).
+Sigue estos pasos si deseas clonar y configurar este proyecto para tu propio familiar.
 
-2. Clonar el Repositorio
+### 1. Prerrequisitos
+* SDK de Flutter instalado (`v3.x`).
+* Dispositivo físico Android (los emuladores **no** pueden realizar llamadas reales).
 
-git clone [https://github.com/TU_USUARIO/flutter-direct-call-app.git](https://github.com/TU_USUARIO/flutter-direct-call-app.git)
-cd flutter-direct-call-app
+### 2. Clonar el Repositorio
 
+    ```bash
+    git clone [https://github.com/ElTapiaGit/flutter-direct-call-app.git](https://github.com/ElTapiaGit/flutter-direct-call-app.git)
+    cd flutter-direct-call-app
 
-3. Configuración del Proyecto
+### 3. Configuración de Seguridad (Paso Crítico ⚠️)
+* Por seguridad, el número de teléfono no está incluido en el código público. Debes crear tu propio archivo de configuración.
+* Navega a la carpeta lib/.
+* Copia el archivo config.example.dart y renómbralo a config.dart.
+* Edita el archivo y coloca el número real:
+  
+    ```bash
+    // Archivo: lib/config.dart
+    // Este archivo es ignorado por git para proteger tu privacidad
 
-a. Instalar Dependencias
+    const String kDefaultPhoneNumber = '1234567'; // <--- TU NÚMERO AQUÍ
 
-flutter pub get
+### 4. Personalizar la Foto (Icono)
+Para que la abuela reconozca a quién va a llamar:
 
+* Reemplaza la imagen en assets/perfil.png con la foto del contacto (se recomienda cuadrada, min 512px).
 
-b. Configurar el Número de Teléfono (¡IMPORTANTE!)
+* Genera los nuevos iconos ejecutando:
 
-Por razones de seguridad, el número de teléfono no se guarda en el repositorio.
+    ```bash
+    flutter pub get
+    dart run flutter_launcher_icons
 
-Ve a la carpeta lib/.
+### 5. Configuración Android
+* Verifica que el permiso esté declarado en android/app/src/main/AndroidManifest.xml:
 
-Copia el archivo config.example.dart y renómbralo a config.dart.
+    ```bash
+    <manifest ...>
+        <uses-permission android:name="android.permission.CALL_PHONE"/>
+        
+        <application ...>
+           ...
+        </application>
+    </manifest>
 
-Abre config.dart y reemplaza el valor de kDefaultPhoneNumber con el número real al que deseas llamar.
+** ▶️ Ejecución
+Conecta tu dispositivo por USB y ejecuta:
 
-// lib/config.dart
-const String kDefaultPhoneNumber = '72224615'; // <--- Pon tu número aquí
-
-
-c. Configurar Icono y Foto de Perfil
-
-Reemplaza la imagen en assets/perfil.png con la foto de tu contacto (preferiblemente 512x512 o 1024x1024).
-
-Para generar los iconos de la app, ejecuta:
-
-dart run flutter_launcher_icons
-
-
-d. Configuración Nativa (Android)
-
-Asegúrate de que el permiso de llamada esté en tu manifiesto de Android:
-android/app/src/main/AndroidManifest.xml
-
-<manifest ...>
-    <!-- Este permiso es obligatorio -->
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <application ...>
-    ...
-    </application>
-</manifest>
-
-
-4. Ejecutar la Aplicación
-
-flutter run
-
-
-🛠️ Stack Tecnológico
-
-Framework: Flutter 3.x
-
-Lenguaje: Dart
-
-Dependencias Clave:
-
-permission_handler: Para solicitar permisos nativos.
-
-flutter_phone_direct_caller: Para la llamada directa.
-
-flutter_launcher_icons: Para la generación del icono de la app.
+    ```bash
+    flutter run
+    
